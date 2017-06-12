@@ -92,4 +92,50 @@ export class FundModel {
 			});
 		});
 	}
+
+	/*
+	 * calcuate the earing , between two date,
+	 * dataList: 
+	 *   [{
+	 *   	date:20170101,
+	 *   	jjjz:1.0622,
+	 *   },... ]
+	 * */
+	calculateEarning(dataList,beginDate,endDate){
+		let begin = this.getNearest(dataList,beginDate);
+		let end = this.getNearest(dataList,endDate);
+		if(!begin || !end){
+			throw new Error('no date find:',begin,end);
+		}
+		return this.earning(begin.jjjz,end.jjjz);
+	}
+
+	earning(price1,price2){
+		console.debug(`price1:${price1},price2:${price2}`);
+		return (price2-price1)/price1;
+	}
+
+	getNearest(dataList,date){
+		if(dataList && dataList.length > 0){
+			for(let d in dataList){
+				//console.debug(`the list date:${dataList[d].date},the date:${date}`);
+				if(dataList[d].date >= date){
+					return dataList[d];
+				}
+			}
+		}else{
+			throw new Error('null data list:',dataList);
+		}
+		return null;
+	}
+
+
+}
+
+
+
+/*
+ * the structure for fund data
+ * */
+export class FundData {
 }

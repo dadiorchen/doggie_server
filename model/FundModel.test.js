@@ -16,7 +16,7 @@ describe('fund model test',() => {
 		let model = new FundModel();
 		let fundNumber = '096001';
 		//DEBUG = false;
-		return model.fetchFundData(fundNumber).then((data) => {
+		return model.fetchFundData(fundNumber,2).then((data) => {
 			let {totalNum,dataList} = data;
 			console.log(`the result of data:totalNum:${totalNum},dataList:${dataList.length}`);
 			expect(+totalNum).toBeGreaterThan(0);
@@ -27,5 +27,40 @@ describe('fund model test',() => {
 
 	it('test: format data , and save data to file',() => {
 		
+	});
+
+
+
+	it('test: calculate earing:',() => {
+		let model = new FundModel();
+		let dataList = [
+			{
+				date:20170101,
+				jjjz:1.00,
+			},
+			{
+				date:20170102,
+				jjjz:1.10,
+			},
+			{
+				date:20170103,
+				jjjz:1.20,
+			},
+			{
+				date:20170104,
+				jjjz:1.30,
+			},
+			{
+				date:20170105,
+				jjjz:1.40,
+			},
+			{
+				date:20170106,
+				jjjz:1.50,
+			},
+		]
+		let earning = model.calculateEarning(dataList,20170101,20170105);
+		expect(earning).toBeCloseTo(0.4,5);
+
 	});
 });

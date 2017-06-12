@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "babel-node": "babel-node downloadFundData.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.5.2"
+    "babel-preset-env": "^1.5.2",
+    "jest": "^20.0.4"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1"
