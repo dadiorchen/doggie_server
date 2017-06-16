@@ -2,6 +2,7 @@
  * the fund model : deal with the fund data, fetch data from sina, generate the data for render a chart
  */
 import fetch from 'isomorphic-fetch';
+import * as Utils from '../utils/Utils.js';
 
 
 const ITEMS_PER_PAGE = 20;
@@ -123,10 +124,17 @@ export class FundModel {
 					return dataList[d];
 				}
 			}
+			//if not found , get the lastest one
+			return dataList[dataList.length -1];
 		}else{
 			throw new Error('null data list:',dataList);
 		}
 		return null;
+	}
+
+	calculatePeriodEarning(dataList,beginDate,periodDays){
+		let endDate = Utils.getDateAfter(beginDate,periodDays);
+		return this.calculateEarning(dataList,beginDate,endDate);
 	}
 
 
