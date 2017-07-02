@@ -11,7 +11,7 @@ app.get('/',function(req,res){
 });
 
 
-app.get('/fundData',function(req,res){
+app.get('/fundData/:id',function(req,res){
 	//let data = 
 	//	[
 	//		{
@@ -19,7 +19,7 @@ app.get('/fundData',function(req,res){
 	//			jjjz:1.22,
 	//		},
 	//	];
-	let data = fs.readFileSync('096001.txt','utf-8');
+	let data = fs.readFileSync(`${req.params.id}.txt`,'utf-8');
 	data = JSON.parse(data);
 	console.log('data:',data);
 	
